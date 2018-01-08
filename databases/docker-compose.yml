@@ -14,7 +14,7 @@ services:
 # mysql
 # ------------------------------------------
     mysql:
-      image: registry.local-c.com/local-c/mysql:5.7
+      image: mysql:5.7
       env_file: .env
       depends_on:
         - mysql-data
@@ -39,7 +39,7 @@ services:
 # postgres
 # ------------------------------------------
     postgresql:
-      image: registry.local-c.com/local-c/postgres:9.6
+      image: postgres:9.6
       env_file: .env
       environment:
         POSTGRES_PASSWORD: $POSTGRES_PASSWORD
@@ -62,7 +62,7 @@ services:
 # mongodb
 # ------------------------------------------
     mongo:
-      image: registry.local-c.com/local-c/mongo-db:latest
+      image: mongo
       ports:
         - $MONGO_PORT:$MONGO_PORT
 #      volumes_from:
