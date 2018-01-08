@@ -18,3 +18,7 @@ MONGO_PORT=22222
 `docker-compose up -d`
 
 
+# カスタムのcnfファイルを追加
+
+ADD mysqld.cnf /etc/mysql/conf.d/
+RUN	chmod 644 /etc/mysql/conf.d/mysqld.cnf
