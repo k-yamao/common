@@ -1,0 +1,80 @@
+version: '2'
+
+services:
+
+# ------------------------------------------
+# mysql データ
+# ------------------------------------------
+    mysql-data:
+      image: busybox
+      volumes:
+        - ./mysql-data:/var/lib/mysql
+      container_name: mysql-data
+# ------------------------------------------
+# mysql
+# ------------------------------------------
+    mysql:
+      image: registry.local-c.com/local-c/mysql:5.7
+      env_file: .env
+      depends_on:
+        - mysql-data
+      environment:
+        MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      ports:
+        - $MYSQL_PORT:$MYSQL_PORT
+      volumes_from:
+        - mysql-data
+      container_name: mysql-db
+      restart: always
+      privileged: true
+# ------------------------------------------
+# postgres データ
+# ------------------------------------------
+    postgres-data:
+      image: busybox
+      volumes:
+          - /var/lib/postgresql/data
+      container_name: postgres-data
+# ------------------------------------------
+# postgres
+# ------------------------------------------
+    postgresql:
+      image: registry.local-c.com/local-c/postgres:9.6
+      env_file: .env
+      environment:
+        POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      ports:
+        - $POSTGRES_PORT:$POSTGRES_PORT
+      volumes_from:
+        - postgres-data
+      container_name: postgres-db
+      restart: always
+      privileged: true
+# ------------------------------------------
+# mongodb データ
+# ------------------------------------------
+#    mongo-data:
+#      image: busybox
+#      volumes:
+#        - ./mongo-data:/data/db
+#      container_name: mongo-data
+# ------------------------------------------
+# mongodb
+# ------------------------------------------
+    mongo:
+      image: registry.local-c.com/local-c/mongo-db:latest
+      ports:
+        - $MONGO_PORT:$MONGO_PORT
+#      volumes_from:
+#          - mongo-data
+      container_name: mongo-db
+      restart: always
+      privileged: true
+
+# ------------------------------------------
+# 共有ネットワーク
+# ------------------------------------------
+networks:
+  default:
+    external:
+      name: shared

@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+
+## ------------------------------------------
+## dockerレジストリ
+## ------------------------------------------
+    docker-registry:
+      image: registry:2.6.0
+      container_name: docker-registry
+      privileged: true
+      ports:
+        - 5000
+      environment:
+        VIRTUAL_HOST: $VIRTUAL_HOST
+        LETSENCRYPT_HOST: $LETSENCRYPT_HOST
+        LETSENCRYPT_EMAIL: $LETSENCRYPT_EMAIL
+        REGISTRY_STORAGE: $REGISTRY_STORAGE
+        REGISTRY_STORAGE_S3_ACCESSKEY: $REGISTRY_STORAGE_S3_ACCESSKEY
+        REGISTRY_STORAGE_S3_SECRETKEY: $REGISTRY_STORAGE_S3_SECRETKEY
+        REGISTRY_STORAGE_S3_BUCKET: $REGISTRY_STORAGE_S3_BUCKET
+        REGISTRY_STORAGE_S3_REGION: $REGISTRY_STORAGE_S3_REGION
+        REGISTRY_STORAGE_S3_ROOTDIRECTORY: $REGISTRY_STORAGE_S3_ROOTDIRECTORY
+#      restart: always
+
+# ------------------------------------------
+# 共有ネットワーク
+# ------------------------------------------
+networks:
+  default:
+    external:
+      name: shared
