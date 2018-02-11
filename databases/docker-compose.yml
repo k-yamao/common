@@ -51,22 +51,16 @@ services:
       restart: always
       privileged: true
 # ------------------------------------------
-# mongodb データ
-# ------------------------------------------
-#    mongo-data:
-#      image: busybox
-#      volumes:
-#        - ./mongo-data:/data/db
-#      container_name: mongo-data
-# ------------------------------------------
 # mongodb
 # ------------------------------------------
     mongo:
-      image: mongo
+      image: mongo:3.4
+      env_file: .env
       ports:
         - $MONGO_PORT:$MONGO_PORT
-#      volumes_from:
-#          - mongo-data
+      environment:
+        - MONGO_INITDB_ROOT_USERNAME=$MONGO_INITDB_ROOT_USERNAME
+        - MONGO_INITDB_ROOT_PASSWORD=$MONGO_INITDB_ROOT_PASSWORD
       container_name: mongo-db
       restart: always
       privileged: true
