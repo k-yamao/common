@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+# ------------------------------------------
+# wordpress wp-blog
+# ------------------------------------------
+    wp-blog:
+      image: wordpress
+      env_file: .env
+      ports:
+        - 80
+      volumes:
+          - /home/docker-user/web:/var/www/html/
+      tty: true
+      restart: always
+      environment:
+        VIRTUAL_HOST: $VIRTUAL_HOST
+        LETSENCRYPT_HOST: $LETSENCRYPT_HOST
+        LETSENCRYPT_EMAIL: $LETSENCRYPT_EMAIL
+      container_name: web
+
+networks:
+  default:
+    external:
+      name: shared

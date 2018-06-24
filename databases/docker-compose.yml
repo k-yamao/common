@@ -30,26 +30,26 @@ services:
 # ------------------------------------------
 # postgres データ
 # ------------------------------------------
-    postgres-data:
-      image: busybox
-      volumes:
-          - /var/lib/postgresql/data
-      container_name: postgres-data
+#    postgres-data:
+#      image: busybox
+#      volumes:
+#          - /var/lib/postgresql/data
+#      container_name: postgres-data
 # ------------------------------------------
 # postgres
 # ------------------------------------------
-    postgresql:
-      image: postgres:9.6
-      env_file: .env
-      environment:
-        POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-      ports:
-        - $POSTGRES_PORT:$POSTGRES_PORT
-      volumes_from:
-        - postgres-data
-      container_name: postgres-db
-      restart: always
-      privileged: true
+#    postgresql:
+#      image: postgres:9.6
+#      env_file: .env
+#      environment:
+#        POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+#      ports:
+#        - $POSTGRES_PORT:$POSTGRES_PORT
+#      volumes_from:
+#        - postgres-data
+#      container_name: postgres-db
+#      restart: always
+#      privileged: true
 # ------------------------------------------
 # mongodb
 # ------------------------------------------
