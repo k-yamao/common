@@ -4,13 +4,13 @@ services:
 # ------------------------------------------
 # wordpress wp-blog
 # ------------------------------------------
-    wp-blog:
-      image: wordpress
+    web:
+      image: nginx:1.15.0
       env_file: .env
       ports:
         - 80
       volumes:
-          - /home/docker-user/web:/var/www/html/
+          - /home/docker-user/web/html:/var/www/html/
       tty: true
       restart: always
       environment:
