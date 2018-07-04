@@ -3,9 +3,9 @@
 //Web サーバーが Listen する IP アドレス 
 var LISTEN_IP = '127.0.0.1'; 
 //Web サーバーが Listen する ポート 
-var LISTEN_PORT = 8086; 
+var LISTEN_PORT = 3000; 
 //ファイル名が指定されない場合に返す既定のファイル名 
-var DEFAULT_FILE = "default.html"; 
+var DEFAULT_FILE = "index.html"; 
 
 var http = require('http'), 
     fs = require('fs'); 
@@ -18,7 +18,7 @@ function getExtension(fileName) {
     return extn; 
 } 
 
-//content-type を指定 
+// content-type を指定 
 function getContentType(fileName) { 
     var extentsion = getExtension(fileName).toLowerCase(); 
     var contentType = { 
